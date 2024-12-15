@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Options from './components/Options/Options';
 import Feedback from './components/Feedback/Feedback';
 import './App.css';
@@ -10,6 +10,13 @@ const App = () => {
     bad: 0,
   });
 
+  const updateFeedback = feedbackType => {
+    setFeedback(prevFeedback => ({
+      ...prevFeedback,
+      [feedbackType]: prevFeedback[feedbackType] + 1,
+    }));
+  };
+
   return (
     <div className="app-container">
       <h1>Sip Happens Café</h1>
@@ -17,7 +24,7 @@ const App = () => {
         Please leave your feedback about our service by selecting one of the
         options below.
       </p>
-      <Options feedback={feedback} />
+      <Options updateFeedback={updateFeedback} />
       <Feedback feedback={feedback} />
     </div>
   );
